@@ -1,5 +1,5 @@
 const customExpress = require('./config/customExpress')
-const conexao = require('./infraestrutura/conexao')
+const conexao = require('./infraestrutura/database/conexao')
 // const conexao = require('./infraestrutura/conexaoMysql') // CONECTANDO AO MYSQL
 const Tabelas = require('./infraestrutura/tabelas')
 
