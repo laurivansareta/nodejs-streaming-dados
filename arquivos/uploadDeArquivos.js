@@ -14,7 +14,6 @@ module.exports = (caminho, nomeDoArquivo, callbackImagemCriada) => {
             .on('finish', () => callbackImagemCriada(false, novoCaminho))
     } else {
         const erro = 'Tipo é inválido'
-        console.log('Erro! Tipo inválido')
         callbackImagemCriada(erro)
     }
 }
