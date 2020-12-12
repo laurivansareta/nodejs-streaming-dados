@@ -5,30 +5,50 @@ const axios = require('axios')
 const repositorio = require('../repositorios/atendimento')
 
 class Atendimento {
+    constructor() {
+        this.dataEhValida = ({ data, dataCriacao }) =>
+            moment(data).isSameOrAfter(dataCriacao)
+        this.clienteEhValido = tamanho => tamanho >= 5 || true
+
+        this.valida = parametros =>
+            this.validacoes.filter(campo => {
+                const { nome } = campo
+                const parametro = parametros[nome]
+                console.log('parametros',parametros)
+                return !campo.valido(parametro)
+            })
+
+        this.validacoes = [
+            {
+                nome: 'data',
+                valido: this.dataEhValida,
+                mensagem: 'Data deve ser maior ou igual a data atual'
+            },
+            {
+                nome: 'cliente',
+                valido: this.clienteEhValido,
+                mensagem: 'Cliente deve ter pelo menos cinco caracteres'
+            }
+        ]
+    }
+
     adiciona(atendimento, res) {
 
         let {cliente, pet, servico, status, observacoes, dataAgenamento} = atendimento
         const dataCriacao = moment().format('YYYY-MM-DD HH:mm:ss')
         dataAgenamento = moment(atendimento.data_agendamento, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm:ss')
 
-        const dataEhValida = moment(dataAgenamento).isSameOrAfter(dataCriacao)
-        const clienteEhValido = cliente.length >= 5
+        
+        
+        const parametros = {
+            data: { dataAgenamento, dataCriacao },
+            cliente: { tamanho: atendimento.cliente.length }
+        }
 
-        const validacoes = [
-            {
-                nome: 'data',
-                valido: dataEhValida,
-                mensagem: 'Data deve ser maior ou igual a data atual'
-            },
-            {
-                nome: 'cliente',
-                valido: clienteEhValido,
-                mensagem: 'Cliente deve ter pelo menos cinco caracteres'
-            }
-        ]
-
-        const erros = validacoes.filter(campo => !campo.valido)
+        const erros = this.valida(parametros)
         const existemErros = erros.length
+
+        console.log('erros', erros, existemErros)
 
         if(existemErros){
             return new Promise((resolve, reject) => reject(erros))            
