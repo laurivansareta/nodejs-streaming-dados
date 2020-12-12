@@ -24,5 +24,13 @@ Para gerar build use:
 npm build
 ```
 
+### A partir da aula 3
+Vai ser necessário startar outro serviço que retorna as informações do cliente, para isso precisa executar os seguintes comandos:
+```cmd
+cd /servicos
+npm install
+node clientes.js
+```
+
 ### Fontes originais do curso
 [Link Github do curso Rest com NodeJS: API com Express e MySQL](https://github.com/alura-cursos/nodejs-api-rest/tree/aula-5)
