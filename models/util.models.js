@@ -1,12 +1,12 @@
-exports.createInsertQuery = (tablename, obj) => {
+exports.createInsertQuery = (tablename, values) => {
     const insert = 'INSERT INTO ' + tablename;
-    const keys = Object.keys(obj);
+    const keys = Object.keys(values);
     const dollar = keys.map(function (item, idx) { return '$' + (idx + 1); });
-    const values = Object.keys(obj).map(function (k) { return obj[k]; });
+    const params = Object.keys(values).map(function (k) { return values[k]; });
     
     return {
-        sql: insert + '(' + keys + ')' + ' VALUES(' + dollar + ')',
-        params: values
+        sql: insert + '(' + keys + ')' + ' VALUES(' + dollar + ') RETURNING id;',
+        params: params
     }
 }
 
