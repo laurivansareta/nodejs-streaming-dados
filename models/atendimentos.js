@@ -63,17 +63,8 @@ class Atendimento {
         }        
     }
 
-    lista(res){
-        const sql = 'SELECT * FROM atendimentos '
-
-        conexao.query(sql, (erro, resultados) => {
-            const atendimentos = resultados.rows
-            if (erro) {
-                res.status(400).json(erro)
-            }else{
-                res.status(200).json(atendimentos)
-            }
-        })
+    lista(){
+        return repositorio.lista()
     }
 
     buscaPorId(id, res){
