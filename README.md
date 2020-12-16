@@ -34,3 +34,4 @@ node clientes.js
 
 ### Fontes originais do curso
 [Link Github do curso Rest com NodeJS: API com Express e MySQL](https://github.com/alura-cursos/nodejs-api-rest/tree/aula-5)
+[Link Github do curso NodeJS: Streaming de dados e Repositório](https://github.com/juunegreiros/nodejs-2/tree/aula-5-nova)
